@@ -1,0 +1,7 @@
+{
+  "name": "beaver-taximetro5",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
