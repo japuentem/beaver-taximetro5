@@ -1,0 +1,45 @@
+<div>
+  <div class="ticket-container">
+    <div class="detalle-viaje">
+      <div class="group-container-1">
+        <p class="titulo">Ticket</p>
+        <hr />
+        <p class="item">
+          Banderazo: <span>$ {{ tarifa }}</span>
+        </p>
+        <p class="item">
+          $ Tiempo:
+          <span>$ {{ acumuladoTiempo }}</span>
+        </p>
+        <p class="item">
+          $ Distancia: <span>$ {{ acumuladoDistancia }}</span>
+        </p>
+        <hr />
+      </div>
+      <div class="group-container-2">
+        <p class="total">
+          Total: <span>{{ total }}</span>
+        </p>
+        <hr />
+        <p class="item">
+          Distancia recorrida:
+          <span> {{ distanceTraveled }}</span>
+          mts.
+        </p>
+        <p class="item">
+          Tiempo de viaje: <span> {{ tiempoViajeFormatted }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="group-container-3">
+      <div class="regresar-container">
+        <div class="boton-regresar">
+          <ion-button (click)="onRegresarHomePage()"
+            ><ion-icon slot="start" name="arrow-back-outline"></ion-icon
+            >Regresar</ion-button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

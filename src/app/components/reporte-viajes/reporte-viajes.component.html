@@ -1,0 +1,86 @@
+<ion-content class="reporte-viajes">
+  <p class="titulo">Reporte</p>
+  <hr />
+  <div class="instruction-text">
+    Para filtrar debe elegir una, dos o tres opciones
+  </div>
+  <div class="filtro-container">
+    <ion-select
+      placeholder="Seleccionar año"
+      [(ngModel)]="selectedYear"
+      (ionChange)="filtrarAnio()"
+    >
+      <ion-select-option *ngFor="let year of years">{{
+        year
+      }}</ion-select-option>
+    </ion-select>
+
+    <ion-select
+      placeholder="Seleccionar mes"
+      [(ngModel)]="selectedMonth"
+      (ionChange)="filtrarMes()"
+    >
+      <ion-select-option *ngFor="let month of months">{{
+        month
+      }}</ion-select-option>
+    </ion-select>
+
+    <ion-select
+      placeholder="Seleccionar tipo taxi"
+      [(ngModel)]="selectedTaxiType"
+      (ionChange)="filtrarTipoTaxi()"
+    >
+      <ion-select-option value="libre">Libre</ion-select-option>
+      <ion-select-option value="sitio">Sitio</ion-select-option>
+      <ion-select-option value="radio">Radio Taxi</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div class="card-container">
+    <ion-card *ngFor="let recorrido of recorridosFiltrados">
+      <!-- Aquí mostrar los detalles de cada recorrido -->
+      <ion-card-header>
+        <!-- <ion-card-subtitle>{{ recorrido.fecha }}</ion-card-subtitle> -->
+        <ion-card-title
+          ><p class="header">{{ recorrido.fecha }} {{ recorrido.hora }}</p>
+          <ion-icon
+            name="trash"
+            (click)="eliminarRecorrido(recorrido)"
+          ></ion-icon
+        ></ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>Tiempo: {{ recorrido.tiempo }}</p>
+        <p>Costo: ${{ recorrido.cost }}</p>
+        <p>Tipo de Taxi: {{ recorrido.type }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="totalTiempo && totalCosto">
+    <p>Se viajó un total de {{ totalTiempo }} minutos</p>
+    <p>Total de costo ${{ totalCosto.toFixed(2) }} pesos</p>
+  </div>
+
+  <div class="regresar-container">
+    <div class="boton-regresar">
+      <ion-button (click)="borrarRecorridos()" color="danger"
+        ><ion-icon
+          slot="start"
+          name="trash-outline"
+          class="back-button"
+        ></ion-icon
+        >Borrar Recorridos</ion-button
+      >
+      <ion-button (click)="onRegresarHomePage()"
+        ><ion-icon
+          slot="start"
+          name="arrow-back-outline"
+          class="back-button"
+        ></ion-icon
+        >Regresar</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

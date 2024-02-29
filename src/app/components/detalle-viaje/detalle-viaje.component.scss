@@ -1,0 +1,91 @@
+.ticket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.detalle-viaje {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+  width: 80%;
+  padding: 20px;
+  border: 3px dotted #000;
+}
+.titulo {
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #a12144;
+}
+.item {
+  margin: 10px;
+}
+.total {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #a12144;
+}
+.regresar-container {
+  margin-top: 10px; /* Agregamos margen superior para separar del contenedor anterior */
+  text-align: center;
+}
+.regresar-container .boton-regresar {
+  margin-top: 10px; /* Agregamos un margen superior al botón para espaciarlo dentro del contenedor */
+}
+
+// ********** orientacion containers
+.detalle-viaje {
+  display: grid;
+  gap: 10px;
+}
+
+@media screen and (orientation: portrait) {
+  .detalle-viaje {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+  }
+
+  .group-container-1 {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .group-container-2 {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .group-container-3 {
+    grid-row: 3;
+    grid-column: 1;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .app-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .group-container-1 {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .group-container-2 {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .group-container-3 {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    align-items: center;
+  }
+}

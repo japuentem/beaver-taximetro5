@@ -1,0 +1,61 @@
+.acerca-de {
+  text-align: center;
+  background-color: white;
+}
+.titulo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #a12144;
+  text-decoration: underline;
+}
+
+// ********** orientacion containers
+.acerca-de {
+  display: grid;
+  gap: 10px;
+}
+
+@media screen and (orientation: portrait) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+  }
+
+  .group-container-1 {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .group-container-2 {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .group-container-3 {
+    grid-row: 3;
+    grid-column: 1;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .app-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .group-container-1 {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .group-container-2 {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .group-container-3 {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    align-items: center;
+  }
+}

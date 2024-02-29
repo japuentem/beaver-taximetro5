@@ -1,20 +1,195 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header background-color="success">
+  <div class="header-container">
+    <ion-title class="header-text">TAXIMETRO</ion-title>
+  </div>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="app-container">
+    <!-- <div class="datetime-main"> -->
+    <div class="datetime-container">
+      <div class="datetime-text"><p>{{ currentDate }}</p></div>
+      <div class="datetime-text">
+        <p>{{ currentTime | date:'hh:mm:ss a' }}</p>
+      </div>
+    </div>
+    <!-- </div> -->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="gps-container">
+      <div class="message-container">
+        <div class="message-text">
+          <p
+            class="message-gps"
+            [ngStyle]="{'color': isLocationOn ? 'greenyellow' : 'red' }"
+          >
+            GPS
+          </p>
+          <p class="message-diurno">
+            {{ tipoTarifa() ? 'DIURNO' : 'NOCTURNO'}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cost-center-container">
+      <h2 class="cost-text">
+        <span class="tarifa-number" *ngIf="startedTrip || finishedTrip">
+          {{ obtenerNumeroTarifa() }}
+        </span>
+        <span class="costo-number">
+          {{ finishedTrip || startedTrip ? travelCost.toFixed(2) : 'LIBRE' }}
+        </span>
+      </h2>
+    </div>
+
+    <div class="cost-container">
+      <!-- <div class="message-container">
+        <div class="message-text">
+          <p
+            class="message-gps"
+            [ngStyle]="{'color': isLocationOn ? 'greenyellow' : 'red' }"
+          >
+            GPS
+          </p>
+          <p class="message-diurno">
+            {{ tipoTarifa() ? 'DIURNO' : 'NOCTURNO'}}
+          </p>
+        </div>
+      </div> -->
+
+      <div class="payment-container">
+        <div class="payment-text">
+          <p class="payment-label-left">
+            Velocidad {{ speedometer.toFixed(2) }} km/hr
+          </p>
+          <p class="payment-label-right">
+            {{ (speedometer * 1000).toFixed(2) }} km/hr
+          </p>
+        </div>
+
+        <div class="payment-text">
+          <p class="payment-label-left">
+            Distancia <span *ngIf="chargeByDistance">*</span>
+          </p>
+          <p class="payment-label-right">
+            Tiempo <span *ngIf="chargeByTime">*</span>
+          </p>
+          <div style="clear: both"></div>
+        </div>
+
+        <div class="payment-text">
+          <p class="payment-label-left">
+            {{ (accumulatedDistance>1) ?
+            accumulatedDistance.toFixed(2):(accumulatedDistance *
+            1000).toFixed(2) }} {{(accumulatedDistance>1)?'km.':'mt.'}}
+          </p>
+          <p class="payment-label-right">{{ timeTraveledFormatted }}</p>
+          <div style="clear: both"></div>
+        </div>
+
+        <!-- <div>
+          <p class="payment-label-left">{{(distance * 1000).toFixed(2)}}</p>
+          <p class="payment-label-right">{{ timeTraveledFormattedDebug }}</p>
+          <div style="clear: both"></div>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="button-main">
+      <div class="button-container">
+        <ion-button
+          color="success"
+          expand="full"
+          (click)="startTravel()"
+          [disabled]="startedTrip || finishedTrip || !taxiSelected"
+        >
+          Iniciar
+        </ion-button>
+        <ion-button
+          color="danger"
+          expand="full"
+          (click)="stopTravel()"
+          [disabled]="finishedTrip || !startedTrip"
+        >
+          Terminar
+        </ion-button>
+        <ion-button
+          expand="full"
+          (click)="restartTaximeter()"
+          [disabled]="startedTrip"
+        >
+          Reiniciar
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="radio-border">
+      <div class="radio-main">
+        <p class="label-radio-title">Tipo de taxi que abordo</p>
+      </div>
+      <div class="radio-main">
+        <ion-radio-group
+          class="radio-group-inline"
+          [allowEmptySelection]="true"
+          [(ngModel)]="taxiSelected"
+          [disabled]="startedTrip || finishedTrip"
+        >
+          <ion-item lines="none" class="radio-item">
+            <ion-radio
+              labelPlacement="start"
+              value="libre"
+              [ngClass]="{'radio-text-selected': taxiSelected === 'libre'}"
+              [disabled]="startedTrip || finishedTrip"
+            >
+              <ion-label>Libre</ion-label>
+            </ion-radio>
+            <ion-radio
+              labelPlacement="start"
+              value="sitio"
+              [ngClass]="{'radio-text-selected': taxiSelected === 'sitio'}"
+              [disabled]="startedTrip || finishedTrip"
+            >
+              <ion-label>Sitio</ion-label>
+            </ion-radio>
+            <ion-radio
+              labelPlacement="start"
+              value="radio"
+              [ngClass]="{'radio-text-selected': taxiSelected === 'radio_taxi'}"
+              [disabled]="startedTrip || finishedTrip"
+            >
+              <ion-label>Radio Taxi</ion-label>
+            </ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+    </div>
   </div>
+
+  <!-- <div class="debug-container">
+    <p>Distancia - {{distance.toFixed(6)}}</p>
+    <p>Distancia X 1000 - {{(distance * 1000).toFixed(6)}}</p>
+    <p>Distancia acumulada - {{accumulatedDistance.toFixed(6)}}</p>
+    <p>Velocidad - {{speedometer.toFixed(6)}}</p>
+  </div> -->
 </ion-content>
+
+<ion-footer>
+  <div class="footer-main">
+    <ion-buttons slot="start">
+      <ion-button (click)="showTicket()" [disabled]="!ticket">
+        <ion-icon name="receipt-outline" size="large">Detalle viaje</ion-icon>
+      </ion-button>
+      <ion-button (click)="showReport()">
+        <ion-icon name="calendar" size="large"></ion-icon>
+      </ion-button>
+      <ion-button (click)="showOptions()">
+        <ion-icon name="car-outline" size="large">Configuración</ion-icon>
+      </ion-button>
+      <ion-button (click)="aboutApp()">
+        <ion-icon name="information-circle-outline" size="large"
+          >Información</ion-icon
+        >
+      </ion-button>
+    </ion-buttons>
+  </div>
+</ion-footer>

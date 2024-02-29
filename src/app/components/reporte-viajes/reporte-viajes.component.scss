@@ -1,0 +1,67 @@
+.reporte-viajes {
+  text-align: center;
+  background-color: white;
+}
+
+.instruction-text {
+  font-size: 15px;
+  color: #a12144;
+}
+.titulo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #a12144;
+  text-decoration: underline;
+}
+ion-select {
+  max-width: 84% !important;
+  background: white;
+  color: #a12144;
+  --placeholder-color: blue;
+}
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+ion-card {
+  --background: #ffffff;
+  --color: #a12144;
+  border: solid 2px #a12144;
+  width: 60%;
+}
+.filtro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 10px;
+}
+ion-button {
+  margin-right: 10px; /* Ajusta el margen según tus preferencias */
+}
+
+ion-header,
+.header {
+  padding: 0;
+  margin: 0;
+}
+ion-card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+}
+ion-icon {
+  color: #a12144;
+}
+.regresar-container {
+  margin-top: 5%;
+  width: 96%;
+  height: auto;
+}
+
+.back-button {
+  color: white;
+}
