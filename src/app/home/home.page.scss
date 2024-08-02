@@ -1,3 +1,30 @@
+/* Ajuste general */
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Estilos para pantallas medianas */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+}
+
+/* Estilos para pantallas grandes */
+@media (min-width: 1025px) {
+  .container {
+    padding: 30px;
+  }
+}
+
 // **********
 .header-container {
   display: flex;
@@ -32,14 +59,6 @@
   margin: 5px 0 0 0;
 }
 
-// **********
-// .datetime-main {
-//   display: flex;
-//   justify-content: center;
-//   flex-direction: row;
-//   width: 100%;
-//   margin-bottom: 20px;
-// }
 .datetime-container {
   display: flex;
   justify-content: space-between;
@@ -53,23 +72,24 @@
   margin-bottom: 10px;
 }
 
-// **********
 .gps-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 10px;
   border-radius: 10px;
   border: 5px solid #f00;
   background-color: #242936;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 // **********
 .cost-center-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 95%;
   margin: 0 10px;
   border: solid 5px #f00;
   border-radius: 10px;
@@ -79,7 +99,9 @@
   // color: #252525;
   font-family: "Roboto", "Arial", "Helvetica", "sans-serif";
   // display: inline-block;
-  color: #c50000;
+  // color: #ffe2d1;
+  color: #e01b2e;
+  text-shadow: #ffe2d1 1px 0 5px;
   background-color: #242936;
   text-align: center; /* Centrar el texto horizontalmente */
   word-wrap: break-word; /* Permitir que las palabras largas se rompan */
@@ -169,6 +191,9 @@
 ion-button {
   /* Agrega espaciado entre los botones, puedes ajustar el valor según tu preferencia */
   margin: 0 10px;
+  height: 48px;
+  line-height: 48px;
+  width: 120px;
 }
 .button-main {
   display: flex;
@@ -186,6 +211,10 @@ ion-button {
   padding: 5px 0;
   margin-top: 5px;
 }
+.radio-label-large {
+  font-size: 1.2em; /* Ajusta este valor según sea necesario */
+  line-height: 1.5; /* Asegura que el texto tenga suficiente espacio vertical */
+}
 
 // **********
 ion-radio {
@@ -194,6 +223,9 @@ ion-radio {
 
   --color: #ddd;
   --color-checked: #d9176e;
+
+  height: 34px;
+  width: 34px;
 }
 .radio-border {
   display: flex;
@@ -274,6 +306,11 @@ ion-radio {
 .app-container {
   display: grid;
   gap: 2px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 5px solid yellowgreen;
 }
 
 @media screen and (orientation: portrait) {
@@ -319,8 +356,6 @@ ion-radio {
 
 @media screen and (orientation: landscape) {
   .app-container {
-    // grid-template-columns: repeat(2, 1fr);
-    // grid-template-rows: repeat(2, auto);
     grid-template-columns: 1fr 1fr; /* Dos columnas */
     grid-template-rows: repeat(5, auto); /* Tres filas */
   }
@@ -360,5 +395,3 @@ ion-radio {
   //   grid-column: 1 / span 2;
   // }
 }
-
-// *** a ver que sale

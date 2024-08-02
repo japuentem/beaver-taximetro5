@@ -41,22 +41,7 @@
         </span>
       </h2>
     </div>
-
     <div class="cost-container">
-      <!-- <div class="message-container">
-        <div class="message-text">
-          <p
-            class="message-gps"
-            [ngStyle]="{'color': isLocationOn ? 'greenyellow' : 'red' }"
-          >
-            GPS
-          </p>
-          <p class="message-diurno">
-            {{ tipoTarifa() ? 'DIURNO' : 'NOCTURNO'}}
-          </p>
-        </div>
-      </div> -->
-
       <div class="payment-container">
         <div class="payment-text">
           <p class="payment-label-left">
@@ -68,11 +53,17 @@
         </div>
 
         <div class="payment-text">
-          <p class="payment-label-left">
-            Distancia <span *ngIf="chargeByDistance">*</span>
+          <p
+            class="payment-label-left"
+            [ngStyle]="{ 'color': chargeByDistance ? 'greenyellow' : '#c50000' }"
+          >
+            Distancia <span *ngIf="chargeByDistance"></span>
           </p>
-          <p class="payment-label-right">
-            Tiempo <span *ngIf="chargeByTime">*</span>
+          <p
+            class="payment-label-right"
+            [ngStyle]="{ 'color': chargeByTime ? 'greenyellow' : '#c50000' }"
+          >
+            Tiempo <span *ngIf="chargeByTime"></span>
           </p>
           <div style="clear: both"></div>
         </div>
@@ -87,11 +78,11 @@
           <div style="clear: both"></div>
         </div>
 
-        <!-- <div>
+        <div>
           <p class="payment-label-left">{{(distance * 1000).toFixed(2)}}</p>
           <p class="payment-label-right">{{ timeTraveledFormattedDebug }}</p>
           <div style="clear: both"></div>
-        </div> -->
+        </div>
       </div>
     </div>
 
@@ -141,36 +132,29 @@
               [ngClass]="{'radio-text-selected': taxiSelected === 'libre'}"
               [disabled]="startedTrip || finishedTrip"
             >
-              <ion-label>Libre</ion-label>
             </ion-radio>
+            <ion-label class="radio-label-large">Libre</ion-label>
             <ion-radio
               labelPlacement="start"
               value="sitio"
               [ngClass]="{'radio-text-selected': taxiSelected === 'sitio'}"
               [disabled]="startedTrip || finishedTrip"
             >
-              <ion-label>Sitio</ion-label>
             </ion-radio>
+            <ion-label class="radio-label-large">Sitio</ion-label>
             <ion-radio
               labelPlacement="start"
               value="radio"
               [ngClass]="{'radio-text-selected': taxiSelected === 'radio_taxi'}"
               [disabled]="startedTrip || finishedTrip"
             >
-              <ion-label>Radio Taxi</ion-label>
             </ion-radio>
+            <ion-label class="radio-label-large">Radio Taxi</ion-label>
           </ion-item>
         </ion-radio-group>
       </div>
     </div>
   </div>
-
-  <!-- <div class="debug-container">
-    <p>Distancia - {{distance.toFixed(6)}}</p>
-    <p>Distancia X 1000 - {{(distance * 1000).toFixed(6)}}</p>
-    <p>Distancia acumulada - {{accumulatedDistance.toFixed(6)}}</p>
-    <p>Velocidad - {{speedometer.toFixed(6)}}</p>
-  </div> -->
 </ion-content>
 
 <ion-footer>
